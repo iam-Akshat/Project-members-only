@@ -12,7 +12,12 @@
 
 <p>
   <strong>User:</strong>
-  <%= @post.user_id %>
+  <% if user_signed_in? %>
+    <%= @post.user.username %>
+  <% else %>
+    <%= 'LOGIN TO SEE' %>
+  <% end %>
+  
 </p>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
