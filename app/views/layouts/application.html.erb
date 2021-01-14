@@ -5,12 +5,28 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
+    <nav>
+      <%= link_to 'Members Only', posts_path %>
+      <div>
+        <% if user_signed_in? %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+          <%= link_to "New Post", new_post_path %>
+        <% else %>
+          <%= link_to "Sign In", new_user_session_path %>
+          <%= link_to "Sign Up", new_user_registration_path %>
+        <% end %>
+      </div>
+    </nav>
+    <% if notice %>
+      <p><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p><%= alert %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>
